@@ -44,5 +44,5 @@ summary(ordinal_model)
 #Model prediction
 pred_model_1 <- predict(ordinal_model, test)
 
-pred_model_2 <- predict(ordinal_model,newdata = test, type="p")
+pred_model_2 <- predict(ordinal_model,newdata = test, type="class")
 confusionMatrix(test$price_range, pred_model_2)

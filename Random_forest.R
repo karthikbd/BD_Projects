@@ -34,10 +34,12 @@ test1 <- read.csv("test.csv", header = T, sep = ",")
 #model Building
 library(randomForest)
 
-model_forest_pf <- tuneRF(train[-21],train$price_range,ntreeTry=500,
+model_forest_pf <- tuneRF(train[-21],train$price_range,ntreeTry=1000,
                           stepFactor = 1.5,improve = 0.01,trace = TRUE,
                           plot = TRUE,doBest = FALSE)
-adult.rf = randomForest(price_range ~ ., data = train, ntree = 500, mtry = 9, importance = TRUE, keep.forest = T)
+adult.rf = randomForest(price_range ~ ., data = train, ntree = 1000, mtry = 9, importance = TRUE, keep.forest = T)
 print(adult.rf)
 plot(adult.rf)
 
+pred = predict(adult.rf, test)
+confusionMatrix(pred, test$price_range)
